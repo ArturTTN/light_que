@@ -8,7 +8,7 @@ defmodule Pg do
   end
 
   def insert(term) do
-    :ok
+    {:ok, %{}}
   end
 
   def delete(job_id) do

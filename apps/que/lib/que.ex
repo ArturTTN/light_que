@@ -15,7 +15,7 @@ defmodule Que do
 
   def add(term = {mod, fun, args}) do
     with {:ok, persistance} <- Server.persists(term),
-         {:ok}              <- Server.add_to_que(persistance) do
+         :ok                <- Server.add_to_que(persistance) do
       {:ok, :queued_up}
     else
       error -> {:error, error}
