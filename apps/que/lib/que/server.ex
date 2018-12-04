@@ -38,22 +38,21 @@ defmodule Que.Server do
 
   """
   def handle_cast({:run, {id, term} = task}, state) do
-
-    item = case Persistence.update(id, :task_start) do
-      {:ok, persistence} -> Que.Executer.run_task(task)
-      _error_update_db   -> %{id: id, term: term}
-    end
+    item =
+      case Persistence.update(id, :task_start) do
+        {:ok, persistence} -> Que.Executer.run_task(task)
+        _error_update_db -> %{id: id, term: term}
+      end
 
     {:noreply,
-      [item |state]
-      |> List.flatten
-    }
+     [item | state]
+     |> List.flatten()}
   end
 
   def handle_call(:pop, _from, []), do: {:reply, %{}, []}
 
   def handle_call(:pop, _from, state) do
-    {head, tail} = List.pop_at state, -1
+    {head, tail} = List.pop_at(state, -1)
     {:reply, head, tail}
   end
 
@@ -61,10 +60,13 @@ defmodule Que.Server do
 
   def add_to_que(persistance) do
     __MODULE__
-    |> GenServer.cast({:push, %{
-      id: persistance.id,
-      term: persistance.term
-    }})
+    |> GenServer.cast(
+      {:push,
+       %{
+         id: persistance.id,
+         term: persistance.term
+       }}
+    )
   end
 
   def persists(term) do
@@ -82,7 +84,6 @@ defmodule Que.Server do
 
   def run(%{}), do: {:ok, :queue_emtpy}
 
-
   @doc """
   Every job suppose to return tuple:
   - {:reject, reason}
@@ -95,7 +96,7 @@ defmodule Que.Server do
   end
 
   def check_response({:reject, reason}, persistence) do
-    with {ok, persistence } <- Persistence.update(persistence.id, {:task_failure, reason}) do
+    with {ok, persistence} <- Persistence.update(persistence.id, {:task_failure, reason}) do
       persistence
       |> add_to_que()
     end

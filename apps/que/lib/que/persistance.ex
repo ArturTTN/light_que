@@ -1,5 +1,4 @@
 defmodule Que.Persistence do
-
   #
   # Here we may put adapter from config,
   # either from environment variable of the node

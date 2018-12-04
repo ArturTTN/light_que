@@ -5,7 +5,6 @@ defmodule Que.Executer do
 
   """
   def run({id, term}) do
-
     {mod, fun, args} = :erlang.binary_to_term(term)
 
     apply(mod, fun, args)
@@ -15,10 +14,9 @@ defmodule Que.Executer do
   #### client API ###
 
   def run_task({id, term} = task) do
-
     case Task.start(Que.Executer, :run, [task]) do
       {:ok, _} -> []
-      _        -> %{id: id, term: term}
+      _ -> %{id: id, term: term}
     end
   end
 end

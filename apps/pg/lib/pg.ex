@@ -15,16 +15,19 @@ defmodule Pg do
 
   def insert(term) do
     %Schema{}
-      |> cast(%{
+    |> cast(
+      %{
         term: term
-      }, [:term])
-      |> Repo.insert()
+      },
+      [:term]
+    )
+    |> Repo.insert()
   end
 
   def update(task_id, :task_start) do
     Repo.get_by(Schema, id: task_id)
-      |> cast(%{task_start: NaiveDateTime.utc_now()}, [:task_start])
-      |> Repo.update()
+    |> cast(%{task_start: NaiveDateTime.utc_now()}, [:task_start])
+    |> Repo.update()
   end
 
   def update(task_id, :task_done) do
@@ -34,8 +37,8 @@ defmodule Pg do
 
   def update(task_id, {:task_failure, reason}) do
     Repo.get_by(Schema, id: task_id)
-      |> cast(%{failed_reason: reason}, [:failed_reason])
-      |> Repo.update()
+    |> cast(%{failed_reason: reason}, [:failed_reason])
+    |> Repo.update()
   end
 
   def cleanup() do

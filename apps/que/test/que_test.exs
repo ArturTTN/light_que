@@ -3,7 +3,7 @@ defmodule QueTest do
   doctest Que
 
   setup do
-    Que.Persistence.cleanup
+    Que.Persistence.cleanup()
   end
 
   test "add new job. success" do
@@ -17,7 +17,6 @@ defmodule QueTest do
   end
 
   test "put in que and check order of jobs" do
-
     Que.add({IO, :puts, ["Hello"]})
     Que.add({IO, :puts, ["Buy"]})
     %{id: id_hello} = Que.Server.pop()
@@ -26,7 +25,6 @@ defmodule QueTest do
   end
 
   test "populate state after crash" do
-
     Que.add({IO, :puts, ["Hello"]})
     Que.add({IO, :puts, ["Hello"]})
 
