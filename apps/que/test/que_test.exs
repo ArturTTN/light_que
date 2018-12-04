@@ -19,4 +19,10 @@ defmodule QueTest do
     %{id: id_buy} = Que.Server.pop()
     assert id_hello < id_buy
   end
+
+  test "an empty state" do
+    Que.add({IO, :puts, ["Hello"]})
+    Que.Server.pop()
+    assert Que.get() == {:ok, :queue_emtpy}
+  end
 end
