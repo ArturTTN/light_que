@@ -3,16 +3,23 @@ defmodule Que do
   Documentation for Que.
   """
 
-  @doc """
-  Hello world.
+  @add_help_message """
+  Que.add requires {mod, fun, args}
 
-  ## Examples
+  For example, to run IO.puts("Hello"):
 
-      iex> Que.hello()
-      :world
-
+  > Que.add({IO, :puts, ["arguments"]})
   """
-  def hello do
-    :world
+
+  def add(term = {mod, fun, args}) do
+    :ok
+  end
+
+  def add(_), do: raise ArgumentError, @add_help_message
+  def add(), do: raise ArgumentError, @add_help_message
+
+
+  def get() do
+    :ok
   end
 end
