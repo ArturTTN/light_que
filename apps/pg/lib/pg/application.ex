@@ -10,6 +10,7 @@ defmodule Pg.Application do
     children = [
       # Starts a worker by calling: Pg.Worker.start_link(arg)
       # {Pg.Worker, arg},
+      Pg.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
