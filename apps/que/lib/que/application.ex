@@ -10,6 +10,7 @@ defmodule Que.Application do
     children = [
       # Starts a worker by calling: Que.Worker.start_link(arg)
       # {Que.Worker, arg},
+      Que.Server
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
