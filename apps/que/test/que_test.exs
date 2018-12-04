@@ -3,7 +3,7 @@ defmodule QueTest do
   doctest Que
 
   test "add new job. success" do
-    assert Que.add({IO, :puts, ["Hello"]}) == :ok
+    assert Que.add({IO, :puts, ["Hello"]}) == {:ok, :queued_up}
   end
 
   test "add new job. no params" do
