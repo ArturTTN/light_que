@@ -7,7 +7,8 @@ defmodule PgTest do
   end
 
   test "insert" do
-    assert Pg.insert(%{}) == :ok
+    {:ok, record} = Pg.insert({IO, :puts, ["HEllo"]})
+    assert record.__struct__ == Pg.Schema.Que
   end
 
   test "delete" do

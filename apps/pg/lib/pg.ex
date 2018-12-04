@@ -2,13 +2,22 @@ defmodule Pg do
   @moduledoc """
   Documentation for Pg.
   """
+  import Ecto.Changeset
+  import Ecto.Query
+
+  alias Pg.Repo
+  alias Pg.Schema.Que, as: Schema
 
   def get_all_jobs do
     []
   end
 
   def insert(term) do
-    {:ok, %{}}
+    %Schema{}
+      |> cast(%{
+        term: term
+      }, [:term])
+      |> Repo.insert()
   end
 
   def delete(job_id) do
