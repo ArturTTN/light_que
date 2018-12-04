@@ -27,7 +27,6 @@ defmodule QueTest do
 
   test "populate state after crash" do
 
-
     Que.add({IO, :puts, ["Hello"]})
     Que.add({IO, :puts, ["Hello"]})
 

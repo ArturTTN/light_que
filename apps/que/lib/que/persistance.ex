@@ -19,12 +19,12 @@ defmodule Que.Persistence do
   defdelegate insert(term), to: @adapter
 
   @doc """
-  Delete task into db.
-  """
-  defdelegate delete(task_id), to: @adapter
-
-  @doc """
   Update task reason.
   """
   defdelegate update(task_id, reason), to: @adapter
+
+  @doc """
+  Delete all tasks. For test purpose
+  """
+  defdelegate cleanup(), to: @adapter
 end
