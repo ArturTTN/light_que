@@ -29,8 +29,8 @@
 
 ``` elixir
 Que.add({Que, :ack, []})
-Que.add({IO, :reject, []})
-Que.add({IO, :long_run, [100000]})
+Que.add({Que, :reject, []})
+Que.add({Que, :long_run, [100000]})
 
 Que.get()
 ```
