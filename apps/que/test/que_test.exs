@@ -11,4 +11,12 @@ defmodule QueTest do
       Que.add()
     end
   end
+
+  test "put in que and check order of jobs" do
+    Que.add({IO, :puts, ["Hello"]})
+    Que.add({IO, :puts, ["Buy"]})
+    %{id: id_hello} = Que.Server.pop()
+    %{id: id_buy} = Que.Server.pop()
+    assert id_hello < id_buy
+  end
 end
